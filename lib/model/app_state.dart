@@ -12,29 +12,37 @@ class AppState {
   final User currentUser;
   final List<User> users;
 
+  final String authErrorMessage;
+
   AppState({
     this.isAuthed = false,
     this.currentUser = null,
     this.users = const [],
+    this.authErrorMessage = "No error yet...",
   });
 
+//  GARBAGE!!!!! GARBAGE VERBOSITY
   AppState copyWith({
     bool isAuthed,
     User currentUser,
-    List<User> users}) {
+    List<User> users,
+    String authErrorMessage,
+  }) {
     return AppState(
         isAuthed: isAuthed ?? this.isAuthed,
         currentUser: currentUser ?? this.currentUser,
         users: users ?? this.users,
+        authErrorMessage: authErrorMessage ?? this.authErrorMessage,
     );
   }
 
 //  do i need to implement the hashcode, equality and toString methods?
 // especially... how important is the equality method?
 
+
   @override
   String toString() {
-    return 'AppState{isAuthed: $isAuthed, currentUser: $currentUser, users: $users}';
+    return 'AppState{isAuthed: $isAuthed, authErrorMessage: $authErrorMessage, currentUser: $currentUser, users: $users}';
   }
 
 
