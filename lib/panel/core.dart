@@ -8,7 +8,6 @@ import 'package:login/actions.dart';
 
 // most of the re-usable dumb-views should be in here
 
-
 // Egan handles the redux-managed input form
 // by having a cleanly separated 'add_todo' container:
 // https://github.com/brianegan/flutter_architecture_samples/blob/master/example/redux/lib/containers/add_todo.dart

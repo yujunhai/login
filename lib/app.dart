@@ -7,26 +7,17 @@ import 'package:login/model/user.dart';
 import 'package:login/reducers.dart';
 
 class App extends StatelessWidget {
-
-  static const sampleUser = User("a", "b");
-
   final store = Store<AppState>(
     rootReducer,
-    initialState: new AppState(users: [sampleUser]),
-//      initialState: new AppState(users: [User("a", "b")])
+    initialState: new AppState(users: [User("a", "b")]),
   );
 
   @override
-  Widget build(BuildContext context) {
-    return StoreProvider(
+  Widget build(BuildContext context) => StoreProvider(
       store: store,
       child: MaterialApp(
-        title: "Redux App Title",
+        title: "Prototype",
         theme: ThemeData.light(),
         home: LoginPanel(),
-      )
-    );
-  }
-
+      ));
 }
-

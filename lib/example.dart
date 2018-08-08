@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 //void main() => runApp(new MyApp());
 
-
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -61,12 +60,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return new AppBar(title: new Text(title));
   }
 
-  FloatingActionButton myFloatingActionButton(VoidCallback onPressed, String tooltip) {
+  FloatingActionButton myFloatingActionButton(
+      VoidCallback onPressed, String tooltip) {
     return new FloatingActionButton(
-        onPressed: onPressed,
-        tooltip: tooltip,
-        child: new Icon(Icons.add)
-    );
+        onPressed: onPressed, tooltip: tooltip, child: new Icon(Icons.add));
   }
 
   @override
@@ -78,7 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return new Scaffold(
-        floatingActionButton: myFloatingActionButton(_incrementCounter, "Add One"),
+        floatingActionButton:
+            myFloatingActionButton(_incrementCounter, "Add One"),
         body: new Center(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
@@ -111,11 +109,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-
-        appBar: myAppBar(widget.title)
-
-    );
-
-
+        appBar: myAppBar(widget.title));
   }
 }

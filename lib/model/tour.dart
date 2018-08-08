@@ -1,6 +1,4 @@
-
 class Tour {
-
   final String id; // use a UUID?
   final String description; // how to make this optional?
   final String pickup; // could use e.g. type Location instead of just a String
