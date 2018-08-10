@@ -15,13 +15,6 @@ class AddEditScreen extends StatelessWidget {
   static final GlobalKey<FormFieldState<String>> _passwordKey =
       GlobalKey<FormFieldState<String>>();
 
-//  ... hmm ... but onRegister as a fn takes two type-String params,
-//  and returns null
-//  so
-//  final Function(String, String) onRegister;
-//  final Function(String, String) onRegister;
-//  final Function(String, String) onLogin;
-
   final StringToVoidFn onRegister;
   final StringToVoidFn onLogin;
 
@@ -49,7 +42,7 @@ class AddEditScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               TextFormField(
-                initialValue: "",
+                initialValue: "HELLO",
                 key: _emailKey,
                 style: textTheme.headline,
                 decoration: InputDecoration(hintText: "email"),
@@ -60,7 +53,7 @@ class AddEditScreen extends StatelessWidget {
                 },
               ),
               TextFormField(
-                initialValue: "",
+                initialValue: "LOVE",
                 key: _passwordKey,
                 style: textTheme.subhead,
                 decoration: InputDecoration(hintText: "password"),

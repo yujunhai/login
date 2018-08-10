@@ -5,6 +5,7 @@ import 'package:redux/redux.dart';
 import 'package:login/model/user.dart';
 import 'package:login/actions.dart';
 import 'package:login/panel/login_form.dart';
+import 'package:login/effects.dart';
 
 class LoginPanel extends StatelessWidget {
   @override
@@ -13,7 +14,8 @@ class LoginPanel extends StatelessWidget {
   loginScreen() => StoreConnector<AppState, Map<Symbol, dynamic>>(
       converter: (Store<AppState> store) => {
             #onRegister: (email, password) =>
-                store.dispatch(Register(User(email, password))),
+//                store.dispatch(Register(User(email, password))),
+                httpEffect(store),
             #onLogin: (email, password) =>
                 store.dispatch(Login(User(email, password)))
           },

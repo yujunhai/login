@@ -1,9 +1,7 @@
-
 import 'package:login/model/app_state.dart';
 import 'package:redux/redux.dart';
 import 'package:login/actions.dart';
 import 'package:login/helpers.dart';
-import 'package:collection/collection.dart';
 
 AppState rootReducer(AppState state, dynamic action) => reducers(state, action);
 
@@ -25,48 +23,23 @@ AppState _register(AppState state, Register action) => // {
             users: conj(state.users, action.user),
             authErrorMessage: "");
 
-// You also need to check that passwords match.
-// In reality, this will be handled on a server, not the client.
-AppState _login(AppState state, Login action) {
+// In reality, password check will be handled on server, not client.
+AppState _login(AppState state, Login action) => //{
 
-//  var passwordCorrect =
-//    state.users.any((_) => (_.email == action.user.email && _.password == action.user.password));
+  //  Example of attempting 'pattern matching' using a map.
+  //  (This particular case would be better using ifs because two cases have same outcome)
 
-  print("[existsAlready(state.users, action.user), passwordCorrect(state.users, action.user)]: ${[existsAlready(state.users, action.user), passwordCorrect(state.users, action.user)]}");
-// ^^^ this is evaluating to [true, true] ... yet I'm hitting the default ...
-//  What is allowed in a switch/case statement?
+  // Problems with this approach:
+  // - still verbose e.g. wrapping in Tuple, wrapping in anon fn
+  // - no wild card matching
+  // - normal "match (x, y) with ...cases" is inverted here to: "of ...cases, get (x,y)"
 
-// Ah, the issue (seen per Dartpad) is rather that lists do not have == automatically.
-//  Are you fucking kidding me?
-
-//  ... You can import ListEquality.equals fn,
-//  but the == is actually happening deeper down within switch/case... Yikes.
-
-//  Alternatively you might try a map-based implementation of pattern matching?
-//  What is the "equality" check for a key in a map?
-
-//  You could also implement your own subclass of Map called 'Match',
-//  that does a smarter equality check on keys?
-
-  switch ([existsAlready(state.users, action.user), passwordCorrect(state.users, action.user)]) {
-    case [true, true]:
-      return state.copyWith(isAuthed: true, currentUser: action.user, authErrorMessage: "");
-    case [true, false]:
-      return state.copyWith(authErrorMessage: "Password incorrect.");
-    default:
-      // i.e. user does not already exist (in which case we don't care about pw)
-      return state.copyWith(authErrorMessage: "Email not found.");
-//      is there a way to wild card here?
-//    case [false, true]:
-//      return state.copyWith(authErrorMessage: "Email not found.");
-//    case [false, false]:
-//      return state.copyWith(authErrorMessage: "Email not found.");
-  }
-
-}
-
-
-//    existsAlready(state.users, action.user)
-//        ? state.copyWith(
-//            isAuthed: true, currentUser: action.user, authErrorMessage: "")
-//        : state.copyWith(authErrorMessage: "Email not found.");
+  // You could instead implement a special Match class, that has smarter key lookup,
+  // defaults and wildcard matches; maybe accepts an Enum and can warn when non exhaustive?
+  {
+    Tuple(true, true): () => state.copyWith(isAuthed: true, currentUser: action.user, authErrorMessage: ""),
+    Tuple(false, true): () => state.copyWith(authErrorMessage: "Email not found."),
+    Tuple(true, false): () => state.copyWith(authErrorMessage: "Password incorrect."),
+    Tuple(false, false): () => state.copyWith(authErrorMessage: "Password incorrect."),
+  }[Tuple(existsAlready(state.users, action.user),
+          passwordCorrect(state.users, action.user))]();
