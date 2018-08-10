@@ -4,7 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:login/model/user.dart';
 import 'package:login/model/app_state.dart';
-import 'package:login/actions.dart';
+import 'package:login/events.dart';
 
 // most of the re-usable dumb-views should be in here
 

@@ -42,7 +42,7 @@ class AddEditScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               TextFormField(
-                initialValue: "HELLO",
+                initialValue: "multistop@liefery.com",
                 key: _emailKey,
                 style: textTheme.headline,
                 decoration: InputDecoration(hintText: "email"),
@@ -53,7 +53,7 @@ class AddEditScreen extends StatelessWidget {
                 },
               ),
               TextFormField(
-                initialValue: "LOVE",
+                initialValue: "password",
                 key: _passwordKey,
                 style: textTheme.subhead,
                 decoration: InputDecoration(hintText: "password"),
