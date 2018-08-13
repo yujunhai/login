@@ -30,10 +30,7 @@ class AddEditScreen extends StatelessWidget {
       : super(key: key ?? loginKey);
 
   @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    return loginForm(textTheme);
-  }
+  Widget build(BuildContext context) => loginForm(Theme.of(context).textTheme);
 
   Form loginForm(TextTheme textTheme) {
     return Form(
@@ -72,11 +69,9 @@ class AddEditScreen extends StatelessWidget {
 //                  but a success outcome returns a truthy value, which we use as a signal to
 //                  dispatch an event... :(
                     onPressed: () =>
-//                        when(_formKey.currentState.validate(),
-//                            () => onLogin(_emailKey.currentState.value, _passwordKey.currentState.value))
                         _formKey.currentState.validate()
                             ? onLogin(_emailKey.currentState.value,
-                                _passwordKey.currentState.value)
+                                      _passwordKey.currentState.value)
                             : null,
                   ),
                   RaisedButton(

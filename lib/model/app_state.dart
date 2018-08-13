@@ -10,8 +10,6 @@ class AppState {
   final String sessionKey;
   final Symbol currentPanel;
 
-//  also do a set of Symbols? do an enum?
-
   AppState({
     this.isAuthed = false,
     this.currentUser,
@@ -21,8 +19,7 @@ class AppState {
     this.currentPanel = #auth,
   });
 
-//  GARBAGE!!!!! GARBAGE VERBOSITY
-//  any time we add a new field to state, we have to add it here too -- twice!!!
+  // verbose garbage...
   AppState copyWith(
           {bool isAuthed,
           User currentUser,
@@ -39,11 +36,7 @@ class AppState {
         currentPanel: currentPanel ?? this.currentPanel,
       );
 
-//  do i need to implement the hashcode, equality and toString methods?
-// especially... how important is the equality method?
-
-//  can probably implement this recursively?
-//  or use built_value?
+  // use built_value for this functionality instead (for == etc. too)
   @override
   String toString() {
     return 'AppState{currentPanel: $currentPanel, isAuthed: $isAuthed, authErrorMessage: $authErrorMessage, sessionKey: $sessionKey, currentUser: $currentUser, users: $users}';
