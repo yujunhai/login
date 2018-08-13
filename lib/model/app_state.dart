@@ -8,6 +8,9 @@ class AppState {
   final List<User> users;
   final String authErrorMessage;
   final String sessionKey;
+  final Symbol currentPanel;
+
+//  also do a set of Symbols? do an enum?
 
   AppState({
     this.isAuthed = false,
@@ -15,6 +18,7 @@ class AppState {
     this.users = const [],
     this.authErrorMessage = "",
     this.sessionKey = "",
+    this.currentPanel = #auth,
   });
 
 //  GARBAGE!!!!! GARBAGE VERBOSITY
@@ -24,13 +28,15 @@ class AppState {
           User currentUser,
           List<User> users,
           String authErrorMessage,
-          String sessionKey}) =>
+          String sessionKey,
+          Symbol currentPanel}) =>
       AppState(
         isAuthed: isAuthed ?? this.isAuthed,
         currentUser: currentUser ?? this.currentUser,
         users: users ?? this.users,
         authErrorMessage: authErrorMessage ?? this.authErrorMessage,
         sessionKey: sessionKey ?? this.sessionKey,
+        currentPanel: currentPanel ?? this.currentPanel,
       );
 
 //  do i need to implement the hashcode, equality and toString methods?
@@ -40,6 +46,6 @@ class AppState {
 //  or use built_value?
   @override
   String toString() {
-    return 'AppState{isAuthed: $isAuthed, authErrorMessage: $authErrorMessage, sessionKey: $sessionKey, currentUser: $currentUser, users: $users}';
+    return 'AppState{currentPanel: $currentPanel, isAuthed: $isAuthed, authErrorMessage: $authErrorMessage, sessionKey: $sessionKey, currentUser: $currentUser, users: $users}';
   }
 }

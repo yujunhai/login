@@ -19,7 +19,6 @@ class LoginPanel extends StatelessWidget {
                 store.dispatch(Register(User(email, password))),
 
             #onLogin: (email, password) =>
-//                store.dispatch(Login(User(email, password)))
                   store.dispatch(attemptLoginEffect(email, password)),
           },
       builder: (BuildContext context, Map<Symbol, dynamic> props) =>
@@ -35,18 +34,6 @@ class LoginPanel extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               loginScreen(),
-
-//              is there a way you can do a sub-id for authErrMsg ?
-//              again, it would be a function that accepts a store,
-//              and returns a particular piece of data from the store
-
-//              the advantage would be, that the converter fn now doesn't need to know
-//              how to access authErrorMessage from within the store...
-//              ... this would be helpful especially in cases where
-//              pulling data from the store is non-trivial (e.g. bc nested etc.)
-
-
-//
 
               StoreConnector<AppState, String>(
                   converter: (store) => authErrorMessage(store),
