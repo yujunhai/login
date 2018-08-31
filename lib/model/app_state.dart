@@ -3,6 +3,11 @@ import 'package:login/model/user.dart';
 
 @immutable
 class AppState {
+
+//  N: dividing up would provide clarity when app gets big;
+// the relationship between isAuthed and currentUser should be captured in TYPES,
+// so that compiler can catch invalid states.
+
   final bool isAuthed;
   final User currentUser;
   final List<User> users;

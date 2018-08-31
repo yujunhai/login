@@ -68,11 +68,10 @@ class AddEditScreen extends StatelessWidget {
 //                  YIKES!: A fail outcome in .validate() mutates the UI with a string hardcoded in validate-fn;
 //                  but a success outcome returns a truthy value, which we use as a signal to
 //                  dispatch an event... :(
-                    onPressed: () =>
-                        _formKey.currentState.validate()
-                            ? onLogin(_emailKey.currentState.value,
-                                      _passwordKey.currentState.value)
-                            : null,
+                    onPressed: () => _formKey.currentState.validate()
+                        ? onLogin(_emailKey.currentState.value,
+                            _passwordKey.currentState.value)
+                        : null,
                   ),
                   RaisedButton(
                     child: Text("register"),

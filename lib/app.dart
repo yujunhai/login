@@ -9,6 +9,7 @@ import 'package:login/reducers.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 
 class App extends StatelessWidget {
+
   final store = Store<AppState>(
     rootReducer,
     initialState: new AppState(users: [User("a", "b")]),
@@ -17,6 +18,10 @@ class App extends StatelessWidget {
 
   // Better?: panels as an enum, so we can be warned on non-exhaustive matching.
   // We would like so type safety (compile-time safety) around this mapping...
+
+  // How would we "go back", without a router history?
+  // Navigator gives good transitions between screens --
+  //   might be very difficult to do ourselves.
   final panels = {
     #auth: () => LoginPanel(),
     #home: () => HomePanel(),
@@ -26,34 +31,30 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) => StoreProvider(
       store: store,
       child: MaterialApp(
-        title: "Prototype",
-        theme: ThemeData.light(),
-        home: Scaffold(
-          body: Padding(
-            padding: new EdgeInsets.all(32.0),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  currentPanel(),
-                  debugState(),
-                ],
-              ),
-            )
-          ),
-        )
-      )
-  );
+          title: "Prototype",
+          theme: ThemeData.light(),
+          home: Scaffold(
+            body: Padding(
+                padding: new EdgeInsets.all(32.0),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      currentPanel(),
+                      debugState(),
+                    ],
+                  ),
+                )),
+          )));
 
   // This is effectively our router.
   currentPanel() => StoreConnector<AppState, Symbol>(
-    converter: (store) => store.state.currentPanel,
-    builder: (context, currentPanel) => panels[currentPanel]()
-  );
+      converter: (store) => store.state.currentPanel,
+      builder: (context, currentPanel) => panels[currentPanel]());
 
   // To be replaced by actual Flutter Redux Devtools.
   debugState() => StoreConnector<AppState, String>(
-    converter: (store) => store.state.toString(),
-    builder: (context, state) => Text("\n\nCURRENT APP STATE:\n $state"),
-  );
+        converter: (store) => store.state.toString(),
+        builder: (context, state) => Text("\n\nCURRENT APP STATE:\n $state"),
+      );
 }
